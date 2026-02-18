@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="header-flex">
+        <h1>Users</h1>
+        <button class="btn btn-primary" routerLink="/add-user">+ Register User</button>
+    </div>
+
+    <div class="glass-card">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phonenumber }}</td>
+                        <td class="actions">
+                            <button class="btn-action edit" [routerLink]="['/edit-user', user.id]">Edit</button>
+                            <button class="btn-action delete" (click)="deleteUser(user.id)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="users.length === 0 && !loading">
+                        <td colspan="5" class="empty-state">No users found. Register one above!</td>
+                    </tr>
+                    <tr *ngIf="loading">
+                        <td colspan="5" class="empty-state">Loading users...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
